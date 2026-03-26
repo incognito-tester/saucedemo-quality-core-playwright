@@ -92,7 +92,7 @@ Upload reports
 Reports can be downloaded from the Actions tab after each run.
 
 ## 5. Test Coverage Summary
-Covered
+**Covered**
 
 Authentication (valid, invalid, locked users)
 
@@ -104,7 +104,7 @@ Checkout (E2E flow, validation, totals)
 
 Resilience (slow users, error scenarios)
 
-# Not Covered (by design)
+**Not Covered (by design)**
 
 Cross-browser matrix in CI
 
@@ -112,7 +112,7 @@ Visual diff tools
 
 API testing
 
-# Notes
+**Notes**
 
 No hardcoded waits (uses smart waits)
 
