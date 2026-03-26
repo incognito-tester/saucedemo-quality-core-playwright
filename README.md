@@ -14,21 +14,55 @@ Playwright was chosen for its built-in auto-waiting, reliable execution, and str
 
 ## 2. Architecture Overview
 
-src/
-├── tests/ → Test specs
-├── pages/ → Page Objects
-├── fixtures/ → Test data & custom fixtures
-├── utils/ → Reusable helpers
-└── config/ → Environment setup
+```text
+.
+├── .github/
+│   └── workflows/
+├── reports/
+├── src/
+│   ├── config/
+│   │   └── env.ts
+│   ├── fixtures/
+│   │   ├── checkoutData.json
+│   │   ├── testFixtures.ts
+│   │   └── users.json
+│   ├── pages/
+│   │   ├── CartPage.ts
+│   │   ├── CheckoutCompletePage.ts
+│   │   ├── CheckoutInformationPage.ts
+│   │   ├── CheckoutOverviewPage.ts
+│   │   ├── InventoryPage.ts
+│   │   └── LoginPage.ts
+│   ├── tests/
+│   │   ├── auth.spec.ts
+│   │   ├── cart.spec.ts
+│   │   ├── catalog.spec.ts
+│   │   ├── checkout.spec.ts
+│   │   └── resilience.spec.ts
+│   └── utils/
+│       └── priceUtil.ts
+├── .env.example
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── playwright.config.ts
+└── README.md
+```
+# Folder responsibilities:
+. config/ holds environment-specific settings
+
+. fixtures/ keeps shared test data and runtime fixtures
+
+. pages/ contains Page Objects to separate UI interactions from test logic
+
+. tests/ contains feature-based test specs
+
+. utils/ contains reusable helper functions
 
 
-Key ideas:
-- **Page Objects** → keep UI logic separate from tests
-- **Fixtures** → avoid repeated setup and improve readability
-- **Utils** → reusable, single-purpose helpers (DRY)
-- **Fail-safe locators** → reduce flaky tests
-
-Tests focus only on behavior, not implementation.
+```md
+The framework is organized by responsibility, ensuring clear separation between test logic, UI interaction, and reusable utilities.
+```
 
 ---
 
