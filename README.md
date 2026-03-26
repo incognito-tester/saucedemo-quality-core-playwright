@@ -80,15 +80,15 @@ Open `.env` and fill in the SauceDemo credentials (e.g., `STANDARD_USER=standard
 
 3. **Execution:**
 
-# Run all tests
+Run all tests
 ```bash
 npx playwright test
 ```
-# Run specific test:
+Run specific test:
 ```bash
 npx playwright test src/tests/catalog.spec.ts
 ```
-# Open HTML Report
+Open HTML Report
 ```bash
 npx playwright show-report
 ```
