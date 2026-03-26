@@ -58,6 +58,15 @@ test.describe('Product Catalog Tests', () => {
         expect(actualPrices).toEqual(expectedPrices);
     });
 
+    test('should sort products by price high to low', async ({ inventoryPage }) => {
+        await inventoryPage.sortBy('hilo');
+
+        const actualPrices = (await inventoryPage.getProductPrices()).map(parsePrice);
+        const expectedPrices = [...actualPrices].sort((a, b) => b - a);
+
+        expect(actualPrices).toEqual(expectedPrices);
+    });
+
     test('should detect image issue for problem user', async ({ loginPage, inventoryPage, page }) => {
         await loginPage.goto();
         await loginPage.login(users.problemUser.username, users.problemUser.password);
