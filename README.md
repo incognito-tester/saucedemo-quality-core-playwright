@@ -1,4 +1,6 @@
-# Playwright Test Automation Framework — SauceDemo
+# 🎭 QualityCore Playwright Framework — SauceDemo
+
+![Playwright Tests](https://github.com/incognito-tester/saucedemo-quality-core-playwright/actions/workflows/ci.yml/badge.svg)
 
 This project is a production-oriented test automation framework built using Playwright. The focus is on clean structure, maintainability, and handling real-world test scenarios — not just passing tests.
 
@@ -18,6 +20,7 @@ Playwright was chosen for its built-in auto-waiting, reliable execution, and str
 .
 ├── .github/
 │   └── workflows/
+|       └── ci.yml
 ├── reports/
 ├── src/
 │   ├── config/
@@ -25,7 +28,7 @@ Playwright was chosen for its built-in auto-waiting, reliable execution, and str
 │   ├── fixtures/
 │   │   ├── checkoutData.json
 │   │   ├── testFixtures.ts
-│   │   └── users.json
+│   │   └── users.ts
 │   ├── pages/
 │   │   ├── CartPage.ts
 │   │   ├── CheckoutCompletePage.ts
@@ -41,6 +44,7 @@ Playwright was chosen for its built-in auto-waiting, reliable execution, and str
 │   │   └── resilience.spec.ts
 │   └── utils/
 │       └── priceUtil.ts
+├── .env
 ├── .env.example
 ├── .gitignore
 ├── package-lock.json
@@ -49,49 +53,74 @@ Playwright was chosen for its built-in auto-waiting, reliable execution, and str
 └── README.md
 ```
 # Folder responsibilities:
-. config/ holds environment-specific settings
 
-. fixtures/ keeps shared test data and runtime fixtures
-
-. pages/ contains Page Objects to separate UI interactions from test logic
-
-. tests/ contains feature-based test specs
-
-. utils/ contains reusable helper functions
-
-
-```md
-The framework is organized by responsibility, ensuring clear separation between test logic, UI interaction, and reusable utilities.
-```
+* **`config/`** — Holds environment-specific settings and `env.ts` mapping.
+* **`fixtures/`** — Shared test data (JSON) and custom Playwright `test` extensions.
+* **`pages/`** — Implements the **Page Object Model (POM)** to isolate UI selectors.
+* **`tests/`** — Feature-based test specifications (e.g., Auth, Cart, Checkout).
+* **`utils/`** — Reusable, framework-agnostic helper functions (e.g., price formatters).
 
 ---
 
 ## 3. Setup & Run
 
+1. **Clone & Install:**
 ```bash
 git clone <repo>
 cd <repo>
 npm install
 npx playwright install --with-deps
-npm test 
 ```
-Run specific test:
+2. **Environment Configuration:**
+This project uses `dotenv` for secure credential management.
+
+Copy the template: `cp .env.example .env`
+
+Open `.env` and fill in the SauceDemo credentials (e.g., `STANDARD_USER=standard_user`).
+
+3. **Execution:**
+
+# Run all tests
+```bash
+npx playwright test
+```
+# Run specific test:
 ```bash
 npx playwright test src/tests/catalog.spec.ts
 ```
-## 4. CI/CD Pipeline
+# Open HTML Report
+```bash
+npx playwright show-report
+```
 
-GitHub Actions runs on push and PR:
+---
 
-Install dependencies
+## 4. Reporting & Observability
 
-Run tests
+This framework uses **Allure Report** for rich, graphical test execution insights.
 
-Upload reports
+### Local Reporting
+To generate and view the Allure report locally:
+1. **Generate Results:** `npx playwright test` (creates `allure-results` folder)
+2. **Serve Report:** `npx allure serve allure-results`
 
-Reports can be downloaded from the Actions tab after each run.
+### CI/CD Artifacts
+Every GitHub Action run automatically captures:
+* **Screenshots:** On every test failure.
+* **Traces:** Full Playwright zip traces for debugging.
+* **HTML Reports:** Downloadable from the "Actions" summary page.
 
-## 5. Test Coverage Summary
+---
+## 5. CI/CD Pipeline (GitHub Actions)
+
+The workflow (`ci.yml`) triggers on every Push and Pull Request.
+* **Security:** Sensitive credentials are injected into the CI runner via **GitHub Actions Secrets**.
+* **Artifacts:** On failure, Playwright Traces and Screenshots are uploaded as job artifacts for debugging.
+* **Retention:** HTML Reports are stored for 30 days.
+
+---
+
+## 6. Test Coverage Summary
 **Covered**
 
 Authentication (valid, invalid, locked users)
@@ -112,7 +141,7 @@ Visual diff tools
 
 API testing
 
-**Notes**
+**Engineering Principles**
 
 No hardcoded waits (uses smart waits)
 
