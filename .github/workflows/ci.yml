@@ -18,16 +18,16 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-    # This block maps GitHub Secrets to Environment Variables
-        env:
-          BASE_URL: ${{ secrets.BASE_URL }}
-          STANDARD_USER: ${{ secrets.STANDARD_USER }}
-          LOCKED_OUT_USER: ${{ secrets.LOCKED_OUT_USER }}
-          PROBLEM_USER: ${{ secrets.PROBLEM_USER }}
-          PERFORMANCE_USER: ${{ secrets.PERFORMANCE_USER }}
-          ERROR_USER: ${{ secrets.ERROR_USER }}
-          VALID_PASSWORD: ${{ secrets.VALID_PASSWORD }}
-          INVALID_PASSWORD: ${{ secrets.INVALID_PASSWORD }}
+      # FIXED: 'env' and 'run' must be aligned with the start of the step name
+      env:
+        BASE_URL: ${{ secrets.BASE_URL }}
+        STANDARD_USER: ${{ secrets.STANDARD_USER }}
+        LOCKED_OUT_USER: ${{ secrets.LOCKED_OUT_USER }}
+        PROBLEM_USER: ${{ secrets.PROBLEM_USER }}
+        PERFORMANCE_USER: ${{ secrets.PERFORMANCE_USER }}
+        ERROR_USER: ${{ secrets.ERROR_USER }}
+        VALID_PASSWORD: ${{ secrets.VALID_PASSWORD }}
+        INVALID_PASSWORD: ${{ secrets.INVALID_PASSWORD }}
       run: npx playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
