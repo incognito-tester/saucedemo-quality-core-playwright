@@ -1,5 +1,5 @@
 import { test, expect } from '../fixtures/testFixtures';
-import users from '../fixtures/users.json';
+import users from '../fixtures/users';
 import checkoutData from '../fixtures/checkoutData.json';
 
 const PRODUCTS = {

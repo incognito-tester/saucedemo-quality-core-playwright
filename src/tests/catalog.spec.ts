@@ -1,6 +1,6 @@
 import { describe } from "node:test";
 import { test, expect } from "../fixtures/testFixtures";
-import users from '../fixtures/users.json';
+import users from '../fixtures/users';
 import { parsePrice } from "../utils/priceUtil";
 import { InventoryPage } from "../pages/InventoryPage";
 
